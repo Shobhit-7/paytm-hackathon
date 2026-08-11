@@ -1,0 +1,7 @@
+import { CloudRain, Droplets, Thermometer, Wind } from 'lucide-react';
+import { WeatherData } from '@/types/analysis';
+
+export function WeatherCard({ weather }: { weather: WeatherData }) {
+  const stats = [{ icon: Thermometer, label: 'Air temp', value: `${weather.temperature}°C` }, { icon: Droplets, label: 'Humidity', value: `${weather.humidity}%` }, { icon: CloudRain, label: 'Rain probability', value: `${weather.rain_probability}%` }, { icon: Wind, label: 'Wind', value: `${weather.wind_speed} km/h` }];
+  return <div className="glass-card p-5 md:p-6"><div className="mb-5 flex items-center justify-between"><div><div className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Weather</div><div className="mt-1 text-xs text-muted-foreground">Supplementary information only</div></div><CloudRain className="h-5 w-5 text-racing-blue" /></div><div className="grid grid-cols-2 gap-4">{stats.map(({ icon: Icon, label, value }) => <div key={label} className="rounded-xl border border-white/5 bg-white/[0.02] p-3"><Icon className="mb-3 h-4 w-4 text-muted-foreground" /><div className="text-lg font-semibold">{value}</div><div className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground">{label}</div></div>)}</div>{weather.track_temperature && <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-4 text-xs"><span className="text-muted-foreground">Track temperature</span><span className="font-semibold">{weather.track_temperature}°C</span></div>}</div>;
+}
